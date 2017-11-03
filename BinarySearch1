@@ -1,0 +1,69 @@
+package printmyarray;
+
+//given a sorted array
+//when given a number
+//then find the index of the place in the array where is should go
+//put the number into the array and print out the new array
+//and return the index of the number if already present
+
+public class BinarySearch1 {
+
+    public static void binarySearch(int newnum, int[] numbers) {
+        int larray = numbers.length - 1;
+        int x = 2;
+        int y = 1;
+        boolean sorting = true;
+        while (sorting) {
+            System.out.println("loop");
+            sorting = false;
+            int t = larray * y / x;
+            if (newnum > numbers[t] && newnum < numbers[t + 1]) {
+                int[] results = addPos(numbers, t + 1, newnum);
+                System.out.println(t + 1);
+                for (int result : results) {
+                    System.out.print(result + " ");
+                }
+            } else if (newnum < numbers[t]) {
+                x = x + x;
+                y = 1;
+                sorting = true;
+            } else if (newnum > numbers[t] && newnum > numbers[t + 1]) {
+                x = x + x;
+                y = y * 2 + 1;
+                sorting = true;
+            } else if (newnum == numbers[t]) {
+                sorting = false;
+                System.out.println(t);
+                for (int number : numbers) {
+                    System.out.print(number + " ");
+                }
+            }
+        }
+    }
+
+    public static int[] addPos(int[] a, int pos, int num) {
+        int[] result = new int[a.length];
+        for (int i = 0; i < pos; i++)
+            result[i] = a[i];
+        result[pos] = num;
+        for (int i = pos + 1; i < a.length; i++)
+            result[i] = a[i - 1];
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[] { 0, 1, 3, 6, 8, 9, 11, 15, 18, 22, 36, 45, 72, 81 };
+        int firstnum = 0;
+        binarySearch(firstnum, nums);
+        int secondnum = 1;
+        binarySearch(secondnum, nums);
+        int thirdnum = 2;
+        binarySearch(thirdnum, nums);
+        int fourthnum = 3;
+        binarySearch(fourthnum, nums);
+        int fifthnum = 4;
+        binarySearch(fifthnum, nums);
+
+    }
+
+}
